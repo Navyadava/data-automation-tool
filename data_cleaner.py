@@ -31,3 +31,24 @@ def filter_high_value_orders(df, threshold):
 def add_tax_column(df, tax_rate):
     df["amount_with_tax"] = df["amount"] * (1 + tax_rate)
     return df
+
+def clean_data(df):
+    df = df.copy()
+
+    # Remove duplicate rows
+    df = df.drop_duplicates()
+
+    # Fill missing amounts
+    df["amount"] = df["amount"].fillna(df["amount"].median())
+
+    # Clean category names
+    df["category"] = df["category"].str.strip().str.lower()
+
+    # Convert dates
+    df["date"] = pd.to_datetime(
+        df["date"],
+        errors="coerce",
+        format="mixed"
+    )
+
+    return df

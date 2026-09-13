@@ -1,0 +1,8 @@
+order_id,date,product,category,amount,city
+2001,2026-09-01,Burger,food,15.99,Miami
+2002,2026-09-02,Pizza,food,22.5,Orlando
+2003,2026-09-03,Pasta,food,25.99,Tampa
+2004,2026-09-04,Laptop,electronics,850.0,Miami
+2005,2026-09-05,Mouse,electronics,25.99,Orlando
+2006,2026-09-06,Chair,furniture,150.0,Miami
+2007,2026-09-07,Desk,furniture,25.99,Jacksonville
