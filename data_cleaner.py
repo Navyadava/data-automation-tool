@@ -18,3 +18,16 @@ def inspect_data(data):
 
     print("\n--- Basic Statistics ---")
     print(data.describe())
+
+
+def filter_by_category(df, category):
+    return df[df["category"] == category]
+
+
+def filter_high_value_orders(df, threshold):
+    return df[df["amount"] > threshold]
+
+
+def add_tax_column(df, tax_rate):
+    df["amount_with_tax"] = df["amount"] * (1 + tax_rate)
+    return df
