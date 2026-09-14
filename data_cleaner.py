@@ -52,3 +52,18 @@ def clean_data(df):
     )
 
     return df
+
+def calculate_total_sales(df):
+    return df["amount"].sum()
+
+
+def category_summary(df):
+    return df.groupby("category")["amount"].agg(
+        ["sum", "mean", "count"]
+    )
+
+
+def monthly_summary(df):
+    df = df.copy()
+    df["month"] = df["date"].dt.to_period("M")
+    return df.groupby("month")["amount"].sum()

@@ -7,6 +7,9 @@ from data_cleaner import (
     filter_high_value_orders,
     add_tax_column,
     clean_data,
+    calculate_total_sales,
+    category_summary,
+    monthly_summary,
 )
 
 
@@ -100,6 +103,43 @@ def main():
 
     print("\nCleaned data saved successfully!")
 
+    print("\n--- Total Sales ---")
+    total_sales = cleaned_data["amount"].sum()
+    print(total_sales)
+
+    print("\n--- Average Order Value ---")
+    average_order = cleaned_data["amount"].mean()
+    print(average_order)
+
+    print("\n--- Sales By Category ---")
+    category_sales = cleaned_data.groupby("category")["amount"].sum()
+    print(category_sales)
+
+    print("\n--- Sales By Month ---")
+    cleaned_data["month"] = cleaned_data["date"].dt.to_period("M")
+    monthly_sales = cleaned_data.groupby("month")["amount"].sum()
+    print(monthly_sales)
+
+    print("\n--- Category Summary Table ---")
+
+    category_summary_table = cleaned_data.groupby("category")["amount"].agg(
+        ["sum", "mean", "count"]
+)
+
+    print(category_summary_table)
+
+    print("\n--- Total Sales Function ---")
+    print(calculate_total_sales(cleaned_data))
+
+    print("\n--- Category Summary Function ---")
+    print(category_summary(cleaned_data))
+
+    print("\n--- Monthly Summary Function ---")
+    print(monthly_summary(cleaned_data))
+
+    
+
+    
 
 if __name__ == "__main__":
     main()
