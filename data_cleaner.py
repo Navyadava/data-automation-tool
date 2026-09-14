@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 
 def load_data(file_path):
@@ -67,3 +68,40 @@ def monthly_summary(df):
     df = df.copy()
     df["month"] = df["date"].dt.to_period("M")
     return df.groupby("month")["amount"].sum()
+
+def export_reports(df_clean, summaries, output_dir):
+    # Create output folder if it does not exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    # File paths
+    cleaned_file = os.path.join(output_dir, "cleaned_sales.csv")
+    summary_file = os.path.join(output_dir, "sales_summary.csv")
+    excel_file = os.path.join(output_dir, "sales_report.xlsx")
+
+    # Export cleaned data
+    df_clean.to_csv(cleaned_file, index=False)
+
+    # Export category summary
+    summaries["category"].to_csv(summary_file)
+
+    # Export Excel report with multiple sheets
+    with pd.ExcelWriter(excel_file, engine="openpyxl") as writer:
+        df_clean.to_excel(
+            writer,
+            sheet_name="Cleaned Data",
+            index=False
+        )
+
+        summaries["category"].to_excel(
+            writer,
+            sheet_name="Category Summary"
+        )
+
+        summaries["monthly"].to_excel(
+            writer,
+            sheet_name="Monthly Summary"
+        )
+
+    print(f"Cleaned data saved to {cleaned_file}")
+    print(f"Summary saved to {summary_file}")
+    print(f"Excel report saved to {excel_file}")
