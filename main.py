@@ -1,4 +1,5 @@
 import pandas as pd
+import logging
 
 from data_cleaner import (
     load_data,
@@ -11,6 +12,14 @@ from data_cleaner import (
     category_summary,
     monthly_summary,
     export_reports,
+    validate_required_columns,
+    validate_data_types,
+)
+
+logging.basicConfig(
+    filename="automation.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
 
@@ -19,11 +28,13 @@ def main():
     # DAY 15 - Load and inspect data
     file_path = "sales_data.csv"
 
-    print("Loading sales data...")
+    logging.info("Loading sales data")
 
     data = load_data(file_path)
 
-    print("Data loaded successfully!")
+    logging.info("Sales data file loaded successfully")
+
+    logging.info("Data loaded successfully")
 
     inspect_data(data)
 
@@ -54,11 +65,20 @@ def main():
     print("\n--- Messy Data ---")
 
     messy_data = load_data("messy_sales_data.csv")
+    original_rows = len(messy_data)
+
     print(messy_data)
 
     print("\n--- Final Cleaned Data ---")
 
     cleaned_data = clean_data(messy_data)
+    cleaned_rows = len(cleaned_data)
+    duplicates_removed = original_rows - cleaned_rows
+
+    logging.info(f"Rows before cleaning: {original_rows}")
+    logging.info(f"Rows after cleaning: {cleaned_rows}")
+    logging.info(f"Duplicates removed: {duplicates_removed}")
+
     print(cleaned_data)
 
     # DAY 19 Practice 1 - Export cleaned CSV
@@ -126,7 +146,7 @@ def main():
             sheet_name="Monthly Summary"
         )
 
-    print("Excel report exported to sales_report.xlsx")
+    logging.info("Excel report exported to sales_report.xlsx")
 
     # DAY 19 Project Task
     print("\n--- Export Reports ---")
@@ -135,14 +155,29 @@ def main():
 
     output_dir = input("Enter output folder: ")
 
-    user_data = load_data(input_file)
+    try:
+        user_data = load_data(input_file)
+        logging.info(f"Input file loaded: {input_file}")
 
-    user_cleaned = clean_data(user_data)
+        validate_required_columns(user_data)
+        validate_data_types(user_data)
 
+        user_cleaned = clean_data(user_data)
+
+    except FileNotFoundError:
+        logging.error(f"File not found: {input_file}")
+        print("Error: Input file not found.")
+        return
+
+    except ValueError as error:
+        logging.error(str(error))
+        print(f"Error: {error}")
+        return
+    
     summaries = {
         "category": category_summary(user_cleaned),
         "monthly": monthly_summary(user_cleaned)
-    }
+}
 
     export_reports(
         user_cleaned,

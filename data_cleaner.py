@@ -105,3 +105,26 @@ def export_reports(df_clean, summaries, output_dir):
     print(f"Cleaned data saved to {cleaned_file}")
     print(f"Summary saved to {summary_file}")
     print(f"Excel report saved to {excel_file}")
+
+def validate_required_columns(df):
+    required_columns = {
+        "order_id",
+        "date",
+        "product",
+        "category",
+        "amount",
+        "city"
+    }
+
+    missing_columns = required_columns - set(df.columns)
+
+    if missing_columns:
+        raise ValueError(
+            f"Missing required columns: {', '.join(missing_columns)}"
+        )
+
+def validate_data_types(df):
+    try:
+        pd.to_numeric(df["amount"])
+    except ValueError:
+        raise ValueError("Invalid data type in amount column")
