@@ -58,3 +58,16 @@
 2026-09-16 05:18:04,714 - INFO - Excel report exported to sales_report.xlsx
 2026-09-16 05:18:28,500 - INFO - Input file loaded: messy_sales_data.csv
 2026-09-16 05:18:28,943 - INFO - EUR conversion added to exported report using rate: 0.86582
+2026-09-16 05:39:23,457 - INFO - Loading sales data
+2026-09-16 05:39:23,460 - INFO - Sales data file loaded successfully
+2026-09-16 05:39:23,460 - INFO - Data loaded successfully
+2026-09-16 05:42:35,748 - INFO - Loading sales data
+2026-09-16 05:42:35,753 - INFO - Sales data file loaded successfully
+2026-09-16 05:42:35,753 - INFO - Data loaded successfully
+2026-09-16 05:42:35,831 - INFO - Rows before cleaning: 8
+2026-09-16 05:42:35,832 - INFO - Rows after cleaning: 7
+2026-09-16 05:42:35,832 - INFO - Duplicates removed: 1
+2026-09-16 05:42:41,100 - INFO - Exchange rate fetched successfully: 0.86582
+2026-09-16 05:42:41,562 - INFO - Excel report exported to sales_report.xlsx
+2026-09-16 05:42:55,479 - INFO - Input file loaded: sample_data/messy_sales_data.csv
+2026-09-16 05:42:55,921 - INFO - EUR conversion added to exported report using rate: 0.86582

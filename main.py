@@ -66,7 +66,7 @@ def main():
     # DAY 17 - Clean messy data
     print("\n--- Messy Data ---")
 
-    messy_data = load_data("messy_sales_data.csv")
+    messy_data = load_data("sample_data/messy_sales_data.csv")
     original_rows = len(messy_data)
 
     print(messy_data)
