@@ -1,3 +1,4 @@
+import requests
 import pandas as pd
 import os
 
@@ -128,3 +129,14 @@ def validate_data_types(df):
         pd.to_numeric(df["amount"])
     except ValueError:
         raise ValueError("Invalid data type in amount column")
+
+
+def fetch_exchange_rate():
+    url = "https://api.frankfurter.dev/v2/rate/usd/eur"
+
+    response = requests.get(url)
+    response.raise_for_status()
+
+    data = response.json()
+
+    return data["rate"]

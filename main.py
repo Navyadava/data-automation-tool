@@ -1,5 +1,6 @@
 import pandas as pd
 import logging
+import requests
 
 from data_cleaner import (
     load_data,
@@ -14,6 +15,7 @@ from data_cleaner import (
     export_reports,
     validate_required_columns,
     validate_data_types,
+    fetch_exchange_rate,
 )
 
 logging.basicConfig(
@@ -72,6 +74,7 @@ def main():
     print("\n--- Final Cleaned Data ---")
 
     cleaned_data = clean_data(messy_data)
+
     cleaned_rows = len(cleaned_data)
     duplicates_removed = original_rows - cleaned_rows
 
@@ -80,6 +83,30 @@ def main():
     logging.info(f"Duplicates removed: {duplicates_removed}")
 
     print(cleaned_data)
+
+    # DAY 21 - Exchange Rate Conversion
+    print("\n--- Exchange Rate Conversion ---")
+
+    try:
+        exchange_rate = fetch_exchange_rate()
+
+        cleaned_data["amount_in_eur"] = (
+            cleaned_data["amount"] * exchange_rate
+        ).round(2)
+
+        logging.info(
+            f"Exchange rate fetched successfully: {exchange_rate}"
+        )
+
+        print(
+            cleaned_data[
+                ["product", "amount", "amount_in_eur"]
+            ]
+        )
+
+    except requests.RequestException as error:
+        logging.error(f"API error: {error}")
+        print("Error: Could not fetch exchange rate.")
 
     # DAY 19 Practice 1 - Export cleaned CSV
     cleaned_data.to_csv(
@@ -163,6 +190,15 @@ def main():
         validate_data_types(user_data)
 
         user_cleaned = clean_data(user_data)
+        exchange_rate = fetch_exchange_rate()
+
+        user_cleaned["amount_in_eur"] = (
+            user_cleaned["amount"] * exchange_rate
+        ).round(2)
+
+        logging.info(
+            f"EUR conversion added to exported report using rate: {exchange_rate}"
+        )
 
     except FileNotFoundError:
         logging.error(f"File not found: {input_file}")

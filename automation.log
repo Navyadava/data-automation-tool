@@ -29,3 +29,32 @@
 2026-09-15 05:28:05,535 - INFO - Duplicates removed: 1
 2026-09-15 05:28:05,748 - INFO - Excel report exported to sales_report.xlsx
 2026-09-15 05:28:24,161 - INFO - Input file loaded: messy_sales_data.csv
+2026-09-16 04:47:25,201 - INFO - Loading sales data
+2026-09-16 04:47:25,217 - INFO - Sales data file loaded successfully
+2026-09-16 04:47:25,217 - INFO - Data loaded successfully
+2026-09-16 04:47:25,319 - INFO - Rows before cleaning: 8
+2026-09-16 04:47:25,319 - INFO - Rows after cleaning: 7
+2026-09-16 04:47:25,319 - INFO - Duplicates removed: 1
+2026-09-16 04:47:29,467 - INFO - Exchange rate fetched successfully: 0.86579
+2026-09-16 04:47:29,934 - INFO - Excel report exported to sales_report.xlsx
+2026-09-16 04:47:46,914 - INFO - Input file loaded: messy_sales_data.csv
+2026-09-16 04:50:46,861 - INFO - Loading sales data
+2026-09-16 04:50:46,862 - INFO - Sales data file loaded successfully
+2026-09-16 04:50:46,862 - INFO - Data loaded successfully
+2026-09-16 04:50:46,921 - INFO - Rows before cleaning: 8
+2026-09-16 04:50:46,921 - INFO - Rows after cleaning: 7
+2026-09-16 04:50:46,921 - INFO - Duplicates removed: 1
+2026-09-16 04:50:47,275 - INFO - Exchange rate fetched successfully: 0.86579
+2026-09-16 04:50:47,559 - INFO - Excel report exported to sales_report.xlsx
+2026-09-16 04:51:05,894 - INFO - Input file loaded: messy_sales_data.csv
+2026-09-16 04:51:06,273 - INFO - EUR conversion added to exported report using rate: 0.86579
+2026-09-16 05:18:03,719 - INFO - Loading sales data
+2026-09-16 05:18:03,723 - INFO - Sales data file loaded successfully
+2026-09-16 05:18:03,723 - INFO - Data loaded successfully
+2026-09-16 05:18:03,800 - INFO - Rows before cleaning: 8
+2026-09-16 05:18:03,800 - INFO - Rows after cleaning: 7
+2026-09-16 05:18:03,801 - INFO - Duplicates removed: 1
+2026-09-16 05:18:04,256 - INFO - Exchange rate fetched successfully: 0.86582
+2026-09-16 05:18:04,714 - INFO - Excel report exported to sales_report.xlsx
+2026-09-16 05:18:28,500 - INFO - Input file loaded: messy_sales_data.csv
+2026-09-16 05:18:28,943 - INFO - EUR conversion added to exported report using rate: 0.86582
